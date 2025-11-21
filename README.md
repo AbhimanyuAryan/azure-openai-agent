@@ -41,6 +41,8 @@ AZURE_OPENAI_API_VERSION=2023-07-01-preview
 
 ## Quick Start
 
+### **Script Usage**
+
 ```python
 from azure_openai_agent import SimpleAgent
 
@@ -57,6 +59,56 @@ print(response)
 # Streaming response
 for chunk in agent.chat("Tell me about Python", stream=True):
     print(chunk, end="", flush=True)
+```
+
+### **Interactive Python Session**
+
+For interactive use with `uv run python`:
+
+```python
+# Step 1: Load environment variables (IMPORTANT!)
+>>> from dotenv import load_dotenv
+>>> load_dotenv()
+True
+
+# Step 2: Import and create agent
+>>> from src.azure_openai_agent import SimpleAgent
+>>> agent = SimpleAgent(name="My Assistant")
+
+# Step 3: Ask questions
+>>> response = agent.chat("What is Python?")
+>>> print(response)
+
+>>> agent.chat("How do I create a list in Python?")
+>>> agent.chat("Show me a function example")
+
+# Step 4: Streaming responses
+>>> print("Agent: ", end="")
+>>> for chunk in agent.chat("Explain machine learning", stream=True):
+...     print(chunk, end="", flush=True)
+>>> print()
+
+# Step 5: Conversation management
+>>> agent.chat("My name is John")
+>>> agent.chat("What's my name?")  # Remembers context
+>>> agent.reset_conversation()    # Fresh start
+>>> agent.chat("What's my name?") # Won't remember now
+```
+
+### **Different Question Types**
+
+```python
+# Code questions
+>>> agent.chat("How do I read a file in Python?")
+>>> agent.chat("Show me list comprehensions")
+
+# General questions  
+>>> agent.chat("Explain the difference between lists and tuples")
+>>> agent.chat("What are Python decorators?")
+
+# Add context for better responses
+>>> agent.add_context("User is a beginner programmer")
+>>> agent.chat("How should I start learning?")
 ```
 
 ## Advanced Usage

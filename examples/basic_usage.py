@@ -7,6 +7,9 @@ to the agentic framework.
 import os
 from dotenv import load_dotenv
 from openai import AzureOpenAI
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.azure_openai_agent import SimpleAgent, AzureOpenAIClient, AzureOpenAIConfig
 
 # Load environment variables
