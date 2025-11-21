@@ -1,0 +1,53 @@
+# Lesson Plan Quality Evaluation
+# Based on OpenAI evals format
+
+lesson_plan_quality:
+  id: lesson_plan_quality.dev.v0
+  description: "Evaluates the quality and completeness of AI-generated lesson plans"
+  metrics: [accuracy, completeness_score]
+
+lesson_plan_quality.dev.v0:
+  class: evals.elsuite.modelgraded.classify:ModelBasedClassify
+  args:
+    samples_jsonl: lesson_plan_quality/samples.jsonl
+    eval_type: cot_classify
+    modelgraded_spec: lesson_plan_quality/spec.yaml
+
+# Mathematics lesson plan evaluation
+math_lesson_plans:
+  id: math_lesson_plans.dev.v0
+  description: "Evaluates mathematics lesson plans for pedagogical soundness and mathematical accuracy"
+  metrics: [accuracy, math_clarity_score]
+
+math_lesson_plans.dev.v0:
+  class: evals.elsuite.modelgraded.classify:ModelBasedClassify
+  args:
+    samples_jsonl: math_lesson_plans/samples.jsonl
+    eval_type: cot_classify
+    modelgraded_spec: math_lesson_plans/spec.yaml
+
+# Science lesson plan evaluation  
+science_lesson_plans:
+  id: science_lesson_plans.dev.v0
+  description: "Evaluates science lesson plans for scientific accuracy and inquiry-based learning"
+  metrics: [accuracy, scientific_rigor_score]
+
+science_lesson_plans.dev.v0:
+  class: evals.elsuite.modelgraded.classify:ModelBasedClassify
+  args:
+    samples_jsonl: science_lesson_plans/samples.jsonl
+    eval_type: cot_classify
+    modelgraded_spec: science_lesson_plans/spec.yaml
+
+# English Language Arts lesson evaluation
+english_lesson_plans:
+  id: english_lesson_plans.dev.v0
+  description: "Evaluates English/ELA lesson plans for literacy skill development and engagement"
+  metrics: [accuracy, literacy_focus_score]
+
+english_lesson_plans.dev.v0:
+  class: evals.elsuite.modelgraded.classify:ModelBasedClassify
+  args:
+    samples_jsonl: english_lesson_plans/samples.jsonl
+    eval_type: cot_classify
+    modelgraded_spec: english_lesson_plans/spec.yaml

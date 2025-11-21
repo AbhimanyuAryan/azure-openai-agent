@@ -1,0 +1,62 @@
+# Model-graded specification for lesson plan quality evaluation
+# This follows OpenAI evals modelgraded format
+
+completion_fn: azure_openai_agent
+eval_type: cot_classify
+key: lesson_plan_output
+group: lesson_plans
+
+prompt: |
+  You are an expert educational consultant evaluating the quality of AI-generated lesson plans. 
+
+  Analyze the following lesson plan and determine its overall quality based on these criteria:
+
+  **Essential Components (Must Have):**
+  1. Clear learning objectives or goals
+  2. Target audience/grade level specified  
+  3. Lesson duration and timing
+  4. Required materials and resources
+  5. Step-by-step activities or procedures
+  6. Assessment methods or evaluation criteria
+  7. Educational standards alignment (where applicable)
+
+  **Quality Indicators (Should Have):**
+  8. Differentiation strategies for diverse learners
+  9. Engagement and motivation techniques
+  10. Real-world connections or applications
+  11. Higher-order thinking opportunities
+  12. Clear, actionable language
+  13. Age-appropriate content and vocabulary
+  14. Logical flow and organization
+
+  **Subject-Specific Criteria:**
+  15. Content accuracy and completeness
+  16. Appropriate pedagogical approaches for the subject
+  17. Integration of subject-specific skills and concepts
+
+  Grade the lesson plan as:
+  - A: Excellent (90-100%) - Has all essential components plus most quality indicators
+  - B: Good (80-89%) - Has all essential components plus some quality indicators  
+  - C: Satisfactory (70-79%) - Has most essential components, minimal quality indicators
+  - D: Needs Improvement (60-69%) - Missing some essential components
+  - F: Poor (Below 60%) - Missing many essential components, not usable
+
+  Lesson Plan to Evaluate:
+  {lesson_plan_output}
+
+  Subject: {subject}
+  Grade Level: {grade_level}
+  Topic: {topic}
+
+  Think step by step:
+  1. Check for each essential component (1-7)
+  2. Evaluate quality indicators (8-14)  
+  3. Assess subject-specific criteria (15-17)
+  4. Determine overall grade and justify
+
+choice_scores:
+  A: 1
+  B: 0.8  
+  C: 0.6
+  D: 0.4
+  F: 0

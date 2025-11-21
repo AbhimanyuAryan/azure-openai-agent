@@ -1,0 +1,62 @@
+# Model-graded specification for mathematics lesson plan evaluation
+
+completion_fn: azure_openai_agent
+eval_type: cot_classify
+key: lesson_plan_output
+group: math_lessons
+
+prompt: |
+  You are a mathematics education expert evaluating an AI-generated math lesson plan.
+
+  **Mathematics-Specific Criteria:**
+
+  **Mathematical Accuracy (Critical):**
+  - All mathematical content is correct
+  - Proper mathematical notation and terminology
+  - Appropriate level of mathematical rigor for grade level
+  - No mathematical errors or misconceptions
+
+  **Pedagogical Approach:**
+  - Uses effective math teaching strategies (concrete-representational-abstract, problem-solving, etc.)
+  - Includes multiple representations (visual, symbolic, verbal)
+  - Scaffolding from simple to complex concepts
+  - Connects to prior mathematical knowledge
+
+  **Problem-Solving Focus:**
+  - Includes authentic problem-solving opportunities
+  - Multiple solution strategies encouraged
+  - Real-world applications when appropriate
+  - Mathematical reasoning and justification emphasized
+
+  **Assessment and Practice:**
+  - Formative assessment throughout lesson
+  - Variety of problem types and difficulty levels
+  - Clear success criteria for mathematical understanding
+  - Independent and collaborative practice opportunities
+
+  **Grade-Level Appropriateness:**
+  - Mathematical content aligns with grade-level standards
+  - Vocabulary and concepts appropriate for student development
+  - Realistic time expectations for mathematical tasks
+
+  Evaluate this mathematics lesson plan:
+
+  {lesson_plan_output}
+
+  Subject: {subject}
+  Grade Level: {grade_level}  
+  Topic: {topic}
+
+  Grade as:
+  - A: Mathematically accurate, excellent pedagogy, engaging activities
+  - B: Mathematically sound, good teaching strategies, appropriate level
+  - C: Generally correct math, basic teaching approach, meets requirements
+  - D: Some mathematical issues OR poor pedagogical approach
+  - F: Mathematical errors OR inappropriate for grade level OR missing key components
+
+choice_scores:
+  A: 1
+  B: 0.8
+  C: 0.6
+  D: 0.4
+  F: 0
